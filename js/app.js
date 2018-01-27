@@ -31,10 +31,10 @@ cards = shuffle(cards);
 
 /* openCard function */
 
-function openCard(card) {
+function openCard() {
     console.log("the card was clicked");
     card.classList.add('open', 'show');
-}
+};
 
 /* Create cards with icons */
 
@@ -54,7 +54,9 @@ for (let i = 0; i < cards.length; i++) {
     card.appendChild(icon);
 
     /* Set event listener on the card and call an outside openCard function */
-    card.addEventListener('click', openCard(card));
+    card.addEventListener('click', function() {
+        openCard(this);
+    });
 };
 
 
