@@ -29,25 +29,36 @@ for (let i = 0; i < names.length; i++ ) {
 
 cards = shuffle(cards);
 
+/* openCard function */
+
+function openCard(card) {
+    console.log("the card was clicked");
+    card.classList.add('open', 'show');
+}
+
 /* Create cards with icons */
 
 const cardsContainer = document.querySelector('.deck');
 cardsContainer.innerHTML = '';
+
+
 for (let i = 0; i < cards.length; i++) {
+
     const card = document.createElement('li');
-    card.classList.add('card');
-
     const icon = document.createElement('i');
-    icon.classList.add('fa', 'fa-' + cards[i].name);
 
+    card.classList.add('card');
+    icon.classList.add('fa', 'fa-' + cards[i].name);
 
     cardsContainer.appendChild(card);
     card.appendChild(icon);
 
-    card.addEventListener('click', function() {
-        card.classList.add('open');
-    });
-}
+    /* Set event listener on the card and call an outside openCard function */
+    card.addEventListener('click', openCard(card));
+};
+
+
+
 
 /*
  * Display the cards on the page
