@@ -14,6 +14,8 @@ const names = [
 /* Generate cards objects and put them in a list */
 
 let cards = [];
+let openedCards = [];
+let moveCounter = 0;
 
 for (let i = 0; i < names.length; i++ ) {
     cards.push({
@@ -31,10 +33,30 @@ cards = shuffle(cards);
 
 /* openCard function */
 
-function openCard() {
+function openCard(card) {
     console.log("the card was clicked");
     card.classList.add('open', 'show');
 };
+
+function matchCard(card) {
+    console.log("the match function is called")
+    card.classList.add('match');
+}
+
+function errorCard(card) {
+    card.classList.add('error');
+}
+
+function closeCard(card) {
+    console.log("the card is closed")
+    card.classList.remove('open', 'show')
+}
+
+function addMove() {
+    moveCounter += 1;
+    let moves = document.getElementsByClassName('moves');
+    moves.innerHTML = "Moves" + moveCounter;
+}
 
 /* Create cards with icons */
 
@@ -55,7 +77,29 @@ for (let i = 0; i < cards.length; i++) {
 
     /* Set event listener on the card and call an outside openCard function */
     card.addEventListener('click', function() {
+        /* check if openedCards arrey has an even number of cards */
         openCard(this);
+        openedCards.push(this);
+        if (openedCards.length % 2 === 0) {
+            /* check if last 2 cards are the same */
+            if ((openedCards[openedCards.length - 1].innerHTML == openedCards[openedCards.length - 2].innerHTML) && (openedCards[openedCards.length - 1].lastChild != openedCards[openedCards.length - 2].lastChild)) {
+                console.log("I like miś!");
+                matchCard(this);
+                matchCard(openedCards[openedCards.length - 2]);
+            } else {
+                for (i = 0; i < openedCards.length; i++) {
+                    console.log("card " + openedCards.length + " " + openedCards[i].innerHTML + " " + i )
+                }
+               // errorCard(openedCards[openedCards.length - 1]);
+                setTimeout(closeCard(openedCards[openedCards.length - 1]), 2000);
+                setTimeout(closeCard(openedCards[openedCards.length - 2]), 2000);
+                openedCards.pop();
+                openedCards.pop();
+            }
+            /* Increment the move counter */
+            addMove();
+
+        }
     });
 };
 
