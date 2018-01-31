@@ -15,7 +15,7 @@ const names = [
 
 let cards = [];
 let openedCards = [];
-let moveCounter = 0;
+let matchedCards = [];
 
 for (let i = 0; i < names.length; i++ ) {
     cards.push({
@@ -34,12 +34,10 @@ cards = shuffle(cards);
 /* openCard function */
 
 function openCard(card) {
-    console.log("the card was clicked");
     card.classList.add('open', 'show');
 };
 
 function matchCard(card) {
-    console.log("the match function is called")
     card.classList.add('match');
 }
 
@@ -48,21 +46,42 @@ function errorCard(card) {
 }
 
 function closeCard(card) {
-    console.log("the card is closed")
-    card.classList.remove('open', 'show')
+    card.classList.remove('open', 'show', 'error')
 }
 
-function addMove() {
-    moveCounter += 1;
-    let moves = document.getElementsByClassName('moves');
-    moves.innerHTML = "Moves" + moveCounter;
-}
-
-/* Create cards with icons */
 
 const cardsContainer = document.querySelector('.deck');
 cardsContainer.innerHTML = '';
 
+/* Set moves counter */
+
+let moveCounter = 0;
+
+let moves = document.querySelector('span.moves');
+moves.innerText = "0";
+
+function addMove() {
+    moveCounter += 1;
+    moves.innerText = moveCounter;
+}
+
+/* remove stars */
+
+function removeStar() {
+    let star = document.querySelector('.stars li');
+    if (moveCounter % 5 === 0 && moveCounter !== 0) {
+        star.parentNode.removeChild(star);
+    };
+}
+
+/* display score dialog */
+
+function displayScore() {
+    alert("you won!");
+}
+
+/* Create cards with icons */
+/* Game moves */
 
 for (let i = 0; i < cards.length; i++) {
 
@@ -77,34 +96,52 @@ for (let i = 0; i < cards.length; i++) {
 
     /* Set event listener on the card and call an outside openCard function */
     card.addEventListener('click', function() {
+        if (openedCards.includes(this) && matchedCards.includes(this)) {
+            return;
+        }
+
         /* check if openedCards arrey has an even number of cards */
         openCard(this);
         openedCards.push(this);
         if (openedCards.length % 2 === 0) {
             /* check if last 2 cards are the same */
             if ((openedCards[openedCards.length - 1].innerHTML == openedCards[openedCards.length - 2].innerHTML) && (openedCards[openedCards.length - 1].lastChild != openedCards[openedCards.length - 2].lastChild)) {
-                console.log("I like miś!");
                 matchCard(this);
                 matchCard(openedCards[openedCards.length - 2]);
+                matchedCards.push(this);
+                matchedCards.push(openedCards[openedCards.length - 2])
+                openedCards.pop();
+                openedCards.pop();
+                addMove();
             } else {
                 for (i = 0; i < openedCards.length; i++) {
                     console.log("card " + openedCards.length + " " + openedCards[i].innerHTML + " " + i )
                 }
-               // errorCard(openedCards[openedCards.length - 1]);
-                setTimeout(closeCard(openedCards[openedCards.length - 1]), 2000);
-                setTimeout(closeCard(openedCards[openedCards.length - 2]), 2000);
-                openedCards.pop();
-                openedCards.pop();
+                errorCard(openedCards[openedCards.length - 1]);
+                errorCard(openedCards[openedCards.length - 2]);
+                setTimeout(
+                    function() {
+                       closeCard(openedCards[openedCards.length - 1]);
+                       closeCard(openedCards[openedCards.length - 2]);
+                       openedCards.pop();
+                       openedCards.pop();
+                   }, 2000);
+                addMove();
+                removeStar();
             }
-            /* Increment the move counter */
-            addMove();
-
         }
+        setTimeout(
+            function() {
+                if (openedCards.length === 16) {
+                    displayScore();
+
+                };
+            }, 2000);
     });
 };
 
 
-
+/*
 
 /*
  * Display the cards on the page
