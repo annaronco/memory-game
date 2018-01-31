@@ -90,10 +90,8 @@ function removeStar() {
 let scoreModal = document.getElementById("overlay");
 
 function displayScore() {
-    let moveScore = document.getElementsByClassName('total-moves');
-    moveScore.innerText = "boooooo";
-
-    //document.getElementsByClassName('total-stars').innerText = starCounter;
+    document.getElementsByClassName('total-moves').innerText = moveCounter;
+    document.getElementsByClassName('total-stars').innerText = starCounter;
     scoreModal.style.visibility = "visible";
 }
 
