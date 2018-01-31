@@ -50,6 +50,14 @@ function closeCard(card) {
     card.classList.remove('open', 'show', 'error')
 }
 
+/* disable click on cards in openedCards */
+
+function disableClick() {
+    matchedCards.forEach(function(card) {
+        card.off('click');
+    });
+}
+
 
 const cardsContainer = document.querySelector('.deck');
 cardsContainer.innerHTML = '';
@@ -57,6 +65,7 @@ cardsContainer.innerHTML = '';
 /* Set moves counter */
 
 let moveCounter = 0;
+let starCounter = 3;
 
 let moves = document.querySelector('span.moves');
 moves.innerText = "0";
@@ -72,13 +81,24 @@ function removeStar() {
     let star = document.querySelector('.stars li');
     if (moveCounter % 5 === 0 && moveCounter !== 0) {
         star.parentNode.removeChild(star);
+        starCounter -= 1;
     };
 }
 
 /* display score dialog */
 
+let scoreModal = document.getElementById("overlay");
+
 function displayScore() {
-    alert("you won!");
+    let moveScore = document.getElementsByClassName('total-moves');
+    moveScore.innerText = "boooooo";
+
+    //document.getElementsByClassName('total-stars').innerText = starCounter;
+    scoreModal.style.visibility = "visible";
+}
+
+function closeScore() {
+    scoreModal.style.visibility = "hidden";
 }
 
 /* Create cards with icons */
@@ -110,6 +130,7 @@ for (let i = 0; i < cards.length; i++) {
                     this.removeEventListener('click', function(){});
                     matchCard(this);
                     matchCard(openedCards[openedCards.length - 2]);
+                    disableClick();
                     matchedCards.push(this);
                     matchedCards.push(openedCards[openedCards.length - 2])
                     openedCards.pop();
@@ -134,7 +155,7 @@ for (let i = 0; i < cards.length; i++) {
                 }
                 setTimeout(
                     function() {
-                        if (openedCards.length === 16) {
+                        if (matchedCards.length === 2) {
                             displayScore();
                         };
                     }, 2000);
