@@ -54,9 +54,13 @@ function closeCard(card) {
 
 function disableClick() {
     matchedCards.forEach(function(card) {
-        card.off('click');
+        card.removeEventListener('click', clickCard);
+    });
+    openedCards.forEach(function(card) {
+        card.removeEventListener('click', clickCard);
     });
 }
+
 
 
 const cardsContainer = document.querySelector('.deck');
@@ -90,8 +94,8 @@ function removeStar() {
 let scoreModal = document.getElementById("overlay");
 
 function displayScore() {
-    document.getElementsByClassName('total-moves').innerText = moveCounter;
-    document.getElementsByClassName('total-stars').innerText = starCounter;
+    document.getElementsByClassName('total-moves').innerText = moveCounter.toString;
+    document.getElementsByClassName('total-stars').innerText = starCounter.toString;
     scoreModal.style.visibility = "visible";
 }
 
@@ -99,77 +103,74 @@ function closeScore() {
     scoreModal.style.visibility = "hidden";
 }
 
-/* Create cards with icons */
-/* Game moves */
+/* Game moves functionality */
+//TODO make one opened card not clickable 2 times
 
-for (let i = 0; i < cards.length; i++) {
-
-    const card = document.createElement('li');
-    const icon = document.createElement('i');
-
-    card.classList.add('card');
-    icon.classList.add('fa', 'fa-' + cards[i].name);
-
-    cardsContainer.appendChild(card);
-    card.appendChild(icon);
-
-    /* Set event listener on the card and call an outside openCard function */
-
-    card.addEventListener('click', function() {
-        if (openedCards.length > 1) {
-            return;
-        } else {
-            /* check if openedCards arrey has an even number of cards */
-            openCard(this);
-            openedCards.push(this);
-            if (openedCards.length % 2 === 0) {
-                /* check if last 2 cards are the same */
-                if ((openedCards[openedCards.length - 1].innerHTML == openedCards[openedCards.length - 2].innerHTML) && (openedCards[openedCards.length - 1].lastChild != openedCards[openedCards.length - 2].lastChild)) {
-                    this.removeEventListener('click', function(){});
-                    matchCard(this);
-                    matchCard(openedCards[openedCards.length - 2]);
-                    disableClick();
-                    matchedCards.push(this);
-                    matchedCards.push(openedCards[openedCards.length - 2])
-                    openedCards.pop();
-                    openedCards.pop();
-                    addMove();
-                } else {
-                    for (i = 0; i < openedCards.length; i++) {
-                        console.log("card " + openedCards.length + " " + openedCards[i].innerHTML + " " + i )
-                    }
-                    errorCard(openedCards[openedCards.length - 1]);
-                    errorCard(openedCards[openedCards.length - 2]);
-                    setTimeout(
-                        function() {
-                            closeCard(openedCards[openedCards.length - 1]);
-                            closeCard(openedCards[openedCards.length - 2]);
-                            openedCards.pop();
-                            openedCards.pop();
-                        }, 2000);
-                        addMove();
-                        removeStar();
-                    }
+function clickCard() {
+    if (openedCards.length > 1) {
+        return;
+    } else {
+        /* check if openedCards array has an even number of cards */
+        openCard(this);
+        openedCards.push(this);
+        if (openedCards.length % 2 === 0) {
+            /* check if last 2 cards are the same */
+            if ((openedCards[openedCards.length - 1].innerHTML == openedCards[openedCards.length - 2].innerHTML) && (openedCards[openedCards.length - 1].lastChild != openedCards[openedCards.length - 2].lastChild)) {
+                matchCard(this);
+                matchCard(openedCards[openedCards.length - 2]);
+                disableClick();
+                matchedCards.push(this);
+                matchedCards.push(openedCards[openedCards.length - 2])
+                openedCards.pop();
+                openedCards.pop();
+                addMove();
+            } else {
+                for (i = 0; i < openedCards.length; i++) {
                 }
+                errorCard(openedCards[openedCards.length - 1]);
+                errorCard(openedCards[openedCards.length - 2]);
                 setTimeout(
                     function() {
-                        if (matchedCards.length === 2) {
-                            displayScore();
-                        };
+                        closeCard(openedCards[openedCards.length - 1]);
+                        closeCard(openedCards[openedCards.length - 2]);
+                        openedCards.pop();
+                        openedCards.pop();
                     }, 2000);
+                    addMove();
+                    removeStar();
+                }
             }
-        });
+            setTimeout(
+                function() {
+                    if (matchedCards.length === 2) {
+                        displayScore();
+                    };
+                }, 2000);
+            }
+        };
+
+    /* Generate cards and add event listener */
+
+    for (let i = 0; i < cards.length; i++) {
+
+        const card = document.createElement('li');
+        const icon = document.createElement('i');
+
+        card.classList.add('card');
+        icon.classList.add('fa', 'fa-' + cards[i].name);
+
+        cardsContainer.appendChild(card);
+        card.appendChild(icon);
+
+        card.addEventListener('click', clickCard);
     };
 
-    /*
-
-    /*
-    * Display the cards on the page
-    *   - shuffle the list of cards using the provided "shuffle" method below
-    *   - loop through each card and create its HTML
-    *   - add each card's HTML to the page
-    */
-
+        /*
+        * Display the cards on the page
+        *   - shuffle the list of cards using the provided "shuffle" method below
+        *   - loop through each card and create its HTML
+        *   - add each card's HTML to the page
+        */
     // Shuffle function from http://stackoverflow.com/a/2450976
 
     function shuffle(array) {
