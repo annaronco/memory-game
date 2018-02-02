@@ -24,8 +24,8 @@
 
         	<span class="moves">3</span> Moves
 
-            <div class="restart">
-        		<i class="fa fa-repeat"></i>
+            <div class="restart" >
+                <i class="fa fa-repeat" onclick="reload()"></i> Restart Game
         	</div>
         </section>
 
@@ -39,18 +39,19 @@
     <div id="overlay">
         <div class="modal">
             <header>
-                <a href="#" onclick='closeScore()'><i class="fa fa-times"></i></a>
+                <a href="#" onclick="closeScore()"><i class="fa fa-times"></i></a>
             </header>
             <section class="score-message">
+                <i class="fa fa-check-circle"></i>
                 <h1>Congratulations! You Won!</h1>
                 <span>You finished the game with </span>
-                <span class="total-moves"></span>
+                <span class="total-moves">13</span>
                 <span> moves and </span>
-                <span class="total-stars"></span>
+                <span class="total-stars">2</span>
                 <span> stars.</span>
             </section>
             <footer>
-                <button type="button">Play Again</button>
+                <button class="button" type="button" onclick="reload()">Play Again</button>
             </footer>
         </div>
     </div>
