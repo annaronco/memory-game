@@ -185,7 +185,7 @@ function clickCard() {
                     removeStar();
                 }
                 /* Display scores */
-                if (matchedCards.length === 2) {
+                if (matchedCards.length === 16) {
                     clearInterval(clock);
                     setTimeout(displayScore, 2000);
                 }
