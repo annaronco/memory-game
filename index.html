@@ -16,13 +16,20 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+            <div>
+                <ul class="stars">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                </ul>
 
-        	<span class="moves">3</span> Moves
+                <span class="moves">3</span> Moves
+            </div>
+
+            <div class="clock">
+                <i class="fa fa-hourglass"></i>
+                <span class="time"> 00 : 00</span>
+            </div>
 
             <div class="restart" >
                 <i class="fa fa-repeat" onclick="reload()"></i> Restart Game
@@ -44,10 +51,10 @@
             <section class="score-message">
                 <i class="fa fa-check-circle"></i>
                 <h1>Congratulations! You Won!</h1>
-                <span>You finished the game with </span>
-                <span class="total-moves">13</span>
+                <span>You finished the game in <span class='total-time'></span> with </span>
+                <span class="total-moves"></span>
                 <span> moves and </span>
-                <span class="total-stars">2</span>
+                <span class="total-stars"></span>
                 <span> stars.</span>
             </section>
             <footer>

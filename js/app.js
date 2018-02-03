@@ -105,6 +105,46 @@ function closeScore() {
     scoreModal.style.visibility = "hidden";
 }
 
+/* Measure time*/
+
+let seconds = 0;
+let minutes = 0;
+let zeroSeconds = 0;
+
+function timer() {
+    if (seconds < 59) {
+        seconds++;
+    } else {
+        minutes++;
+        seconds = 0;
+    }
+
+    if (seconds < 10) {
+        zeroSeconds = "0";
+    } else {
+        zeroSeconds = "";
+    }
+
+    if (minutes < 10) {
+        zeroMinutes = "0";
+    } else {
+        zeroMinutes = "";
+    }
+
+    document.querySelector('span.time').innerText = zeroMinutes + minutes + " : " + zeroSeconds + seconds;
+
+    if (minutes === 0) {
+        document.querySelector('span.total-time').innerText = seconds + " seconds";
+    } else if (minutes != 0 && seconds === 0) {
+        document.querySelector('span.total-time').innerText = minutes + " minutes";;
+    } else if (minutes != 0 && seconds === 1) {
+        document.querySelector('span.total-time').innerText = minutes + " minutes and " + seconds + " second";
+    } else {
+        document.querySelector('span.total-time').innerText = minutes + " minutes and " + seconds + " second";
+    }
+}
+
+
 /* Game moves functionality */
 //TODO make one opened card not clickable 2 times
 
@@ -115,6 +155,9 @@ function clickCard() {
         /* check if openedCards array has an even number of cards */
         openCard(this);
         openedCards.push(this);
+        if (moveCounter === 0 && openedCards.length === 1) {
+            clock = setInterval(timer, 1000);
+        };
         if (openedCards.length % 2 === 0) {
             /* check if last 2 cards are the same */
             if ((openedCards[openedCards.length - 1].innerHTML == openedCards[openedCards.length - 2].innerHTML) && (openedCards[openedCards.length - 1].lastChild != openedCards[openedCards.length - 2].lastChild)) {
@@ -141,44 +184,45 @@ function clickCard() {
                     addMove();
                     removeStar();
                 }
-            }
-            setTimeout(
-                function() {
-                    if (matchedCards.length === 2) {
-                        displayScore();
-                    };
-                }, 2000);
+                /* Display scores */
+                if (matchedCards.length === 2) {
+                    clearInterval(clock);
+                    setTimeout(displayScore, 2000);
+                }
             }
         };
-
-        /* Generate cards and add event listener */
-
-        for (let i = 0; i < cards.length; i++) {
-
-            const card = document.createElement('li');
-            const icon = document.createElement('i');
-
-            card.classList.add('card');
-            icon.classList.add('fa', 'fa-' + cards[i].name);
-
-            cardsContainer.appendChild(card);
-            card.appendChild(icon);
-
-            card.addEventListener('click', clickCard);
-        };
-
-        // Shuffle function from http://stackoverflow.com/a/2450976
-
-        function shuffle(array) {
-            var currentIndex = array.length, temporaryValue, randomIndex;
-
-            while (currentIndex !== 0) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex -= 1;
-                temporaryValue = array[currentIndex];
-                array[currentIndex] = array[randomIndex];
-                array[randomIndex] = temporaryValue;
-            }
-
-        return array;
     }
+
+
+
+/* Generate cards and add event listener */
+
+for (let i = 0; i < cards.length; i++) {
+
+    const card = document.createElement('li');
+    const icon = document.createElement('i');
+
+    card.classList.add('card');
+    icon.classList.add('fa', 'fa-' + cards[i].name);
+
+    cardsContainer.appendChild(card);
+    card.appendChild(icon);
+
+    card.addEventListener('click', clickCard);
+};
+
+// Shuffle function from http://stackoverflow.com/a/2450976
+
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+return array;
+}
