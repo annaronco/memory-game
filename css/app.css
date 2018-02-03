@@ -31,6 +31,7 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 3%;
 }
 
 /*
@@ -38,19 +39,17 @@ h1 {
  */
 
 .deck {
-    align-items: center;
+    display: grid;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 0 0 3em;
-    min-height: 680px;
-    padding: 32px;
+    border-radius: 5px;
+    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+    grid-gap: 3%;
+    padding: 25px;
     -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
-    width: 660px;
+    width: 100%;
+    height: 500px;
 }
 
 .deck .card {
@@ -62,9 +61,9 @@ h1 {
     cursor: pointer;
     display: flex;
     font-size: 0;
-    height: 125px;
+    height: 100%;
     justify-content: center;
-    width: 125px;
+    width: 100%;
 }
 
 .deck .card.open {
@@ -97,10 +96,15 @@ h1 {
 */
 
 .score-panel {
-    width: 660px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 10px;
+}
+
+.score-panel .star-panel {
+    margin: 0 50px 10px 0;
+    min-width: 125px;
+    padding-right: 1em;
 }
 
 .score-panel .stars {
@@ -114,6 +118,11 @@ h1 {
     list-style: none;
 }
 
+.score-panel .clock {
+    margin: 0 50px 10px 0;
+    min-width: 125px;
+}
+
 .fa-star {
     color: #e4a802;
 }
@@ -121,6 +130,11 @@ h1 {
 .fa-hourglass {
     color: #333;
     padding-right: 5px;
+}
+
+.score-panel .restart {
+    margin-bottom: 10px;
+    min-width: 125px;
 }
 
 .fa-repeat {
