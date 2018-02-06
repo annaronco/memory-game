@@ -43,8 +43,9 @@ h1 {
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     border-radius: 5px;
     grid-template: repeat(4, 1fr) / repeat(4, 1fr);
-    grid-gap: 3%;
-    padding: 25px;
+    -ms-grid-columns: repeat(4, 1fr);
+    -ms-grid-rows: repeat(4, 1fr);
+    padding: 5%;
     -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
@@ -52,14 +53,15 @@ h1 {
 
 .deck .card {
     align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
     background: #2e3d49;
-    border-radius: 5px;
     color: #fff;
+    border-radius: 5px;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
     cursor: pointer;
     display: flex;
     font-size: 0;
     justify-content: center;
+    margin: 5%;
 }
 
 .deck .card.open {
@@ -68,7 +70,7 @@ h1 {
 }
 
 .deck .card.show {
-    font-size: 33px;
+    font-size: 50px;
 }
 
 .deck .card.match {
@@ -76,7 +78,6 @@ h1 {
     animation-name: match;
     background: #02ccba;
     cursor: default;
-    font-size: 33px;
 }
 
 .deck .card.error {
@@ -84,7 +85,6 @@ h1 {
     animation-name: error;
     background: #db33cd;
     cursor: default;
-    font-size: 33px;
 }
 
 /*
@@ -260,9 +260,14 @@ h1 {
     .container {
         width: 310px;
     }
+
     .deck {
         width: 310px;
         height: 310px;
+    }
+
+    .deck .card.show {
+        font-size: 24px;
     }
 }
 
@@ -270,9 +275,14 @@ h1 {
     .container {
         width: 470px;
     }
+
     .deck {
         width: 470px;
         height: 470px;
+    }
+
+    .deck .card.show {
+        font-size: 32px;
     }
 }
 
@@ -280,9 +290,14 @@ h1 {
     .container {
         width: 556px;
     }
+
     .deck {
         width: 556px;
         height: 556px;
+    }
+
+    .deck .card.show {
+        font-size: 40px;
     }
 }
 
@@ -290,9 +305,14 @@ h1 {
     .container {
         width: 628px;
     }
+
     .deck {
         width: 628px;
         height: 628px;
+    }
+
+    .deck .card.show {
+        font-size: 44px;
     }
 }
 
@@ -300,9 +320,14 @@ h1 {
     .container {
         width: 752px;
     }
+
     .deck {
         width: 752px;
         height: 752px;
+    }
+
+    .deck .card.show {
+        font-size: 50px;
     }
 }
 
@@ -310,8 +335,13 @@ h1 {
     .container {
         width: 900px;
     }
+
     .deck {
         width: 900px;
         height: 900px;
+    }
+
+    .deck .card.show {
+        font-size: 60px;
     }
 }
