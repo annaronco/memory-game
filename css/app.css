@@ -43,8 +43,8 @@ h1 {
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     border-radius: 5px;
     grid-template: repeat(4, 1fr) / repeat(4, 1fr);
-    -ms-grid-columns: repeat(4, 1fr);
-    -ms-grid-rows: repeat(4, 1fr);
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+    -ms-grid-rows: 1fr 1fr 1fr 1fr;
     padding: 5%;
     -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
@@ -59,6 +59,7 @@ h1 {
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
     cursor: pointer;
     display: flex;
+    display: -ms-flexbox;
     font-size: 0;
     justify-content: center;
     margin: 5%;
