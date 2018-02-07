@@ -41,6 +41,10 @@ h1 {
 .deck {
     display: grid;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: -moz-linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: -webkit-linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: -o-linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: -ms-linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     border-radius: 5px;
     grid-template: repeat(4, 1fr) / repeat(4, 1fr);
     -ms-grid-columns: 1fr 1fr 1fr 1fr;
