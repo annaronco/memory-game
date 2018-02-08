@@ -1,6 +1,6 @@
 /* List of card manes */
 
-const names = [
+var names = [
     "diamond",
     "paper-plane-o",
     "anchor",
@@ -13,11 +13,11 @@ const names = [
 
 /* Generate cards objects and put them in a list */
 
-let cards = [];
-let openedCards = [];
-let matchedCards = [];
+var cards = [];
+var openedCards = [];
+var matchedCards = [];
 
-for (let i = 0; i < names.length; i++ ) {
+for (var i = 0; i < names.length; i++ ) {
     cards.push({
         name: names[i],
         visible: false
@@ -65,15 +65,15 @@ function disableClick() {
     });
 }
 
-const cardsContainer = document.querySelector('.deck');
+var cardsContainer = document.querySelector('.deck');
 cardsContainer.innerHTML = '';
 
 /* Set moves counter */
 
-let moveCounter = 0;
-let starCounter = 3;
+var moveCounter = 0;
+var starCounter = 3;
 
-let moves = document.querySelector('span.moves');
+var moves = document.querySelector('span.moves');
 moves.innerText = "0";
 
 function addMove() {
@@ -84,7 +84,7 @@ function addMove() {
 /* remove stars */
 
 function removeStar() {
-    let star = document.querySelector('.stars li');
+    var star = document.querySelector('.stars li');
     if (moveCounter % 5 === 0 && moveCounter !== 0) {
         star.parentNode.removeChild(star);
         starCounter -= 1;
@@ -93,7 +93,7 @@ function removeStar() {
 
 /* display score dialog */
 
-const scoreModal = document.getElementById("overlay");
+var scoreModal = document.getElementById("overlay");
 
 function displayScore() {
     document.querySelector('span.total-moves').innerHTML = moveCounter;
@@ -107,9 +107,9 @@ function closeScore() {
 
 /* Measure time*/
 
-let seconds = 0;
-let minutes = 0;
-let zeroSeconds = 0;
+var seconds = 0;
+var minutes = 0;
+var zeroSeconds = 0;
 
 function timer() {
     if (seconds < 59) {
@@ -197,10 +197,10 @@ function clickCard() {
 
 /* Generate cards and add event listener */
 
-for (let i = 0; i < cards.length; i++) {
+for (var i = 0; i < cards.length; i++) {
 
-    const card = document.createElement('li');
-    const icon = document.createElement('i');
+    var card = document.createElement('li');
+    var icon = document.createElement('i');
 
     card.classList.add('card');
     icon.classList.add('fa', 'fa-' + cards[i].name);
