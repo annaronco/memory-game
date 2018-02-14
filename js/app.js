@@ -87,7 +87,7 @@ function addMove() {
 
 function removeStar() {
     var star = document.querySelector('.stars li');
-    if (moveCounter % 5 === 0 && moveCounter !== 0) {
+    if (moveCounter % 12 === 0 && moveCounter !== 0) {
         star.parentNode.removeChild(star);
         starCounter -= 1;
     };
@@ -171,6 +171,7 @@ function clickCard() {
                 openedCards.pop();
                 openedCards.pop();
                 addMove();
+                removeStar();
             } else {
                 for (i = 0; i < openedCards.length; i++) {
                 }
@@ -205,7 +206,8 @@ for (var i = 0; i < cards.length; i++) {
     var icon = document.createElement('i');
 
     card.classList.add('card');
-    icon.classList.add('fa', 'fa-' + cards[i].name);
+    icon.classList.add('fa');
+    icon.classList.add('fa-' + cards[i].name);
 
     cardsContainer.appendChild(card);
     card.appendChild(icon);
