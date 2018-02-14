@@ -35,6 +35,7 @@ cards = shuffle(cards);
 
 function openCard(card) {
     card.classList.add('open', 'show');
+    card.removeEventListener('click', clickCard);
 };
 
 function matchCard(card) {
@@ -47,7 +48,8 @@ function errorCard(card) {
 }
 
 function closeCard(card) {
-    card.classList.remove('open', 'show', 'error')
+    card.classList.remove('open', 'show', 'error');
+    card.addEventListener('click', clickCard);
 }
 
 function reload() {
@@ -136,11 +138,11 @@ function timer() {
     if (minutes === 0) {
         document.querySelector('span.total-time').innerText = seconds + " seconds";
     } else if (minutes != 0 && seconds === 0) {
-        document.querySelector('span.total-time').innerText = minutes + " minutes";;
+        document.querySelector('span.total-time').innerText = minutes + " minutes";
     } else if (minutes != 0 && seconds === 1) {
         document.querySelector('span.total-time').innerText = minutes + " minutes and " + seconds + " second";
     } else {
-        document.querySelector('span.total-time').innerText = minutes + " minutes and " + seconds + " second";
+        document.querySelector('span.total-time').innerText = minutes + " minutes and " + seconds + " seconds";
     }
 }
 
@@ -160,24 +162,24 @@ function clickCard() {
         };
         if (openedCards.length % 2 === 0) {
             /* check if last 2 cards are the same */
-            if ((openedCards[openedCards.length - 1].innerHTML == openedCards[openedCards.length - 2].innerHTML) && (openedCards[openedCards.length - 1].lastChild != openedCards[openedCards.length - 2].lastChild)) {
+            if ((this.innerHTML == openedCards[0].innerHTML) && (this.lastChild != openedCards[0].lastChild)) {
                 matchCard(this);
-                matchCard(openedCards[openedCards.length - 2]);
+                matchCard(openedCards[0]);
                 disableClick();
                 matchedCards.push(this);
-                matchedCards.push(openedCards[openedCards.length - 2])
+                matchedCards.push(openedCards[0])
                 openedCards.pop();
                 openedCards.pop();
                 addMove();
             } else {
                 for (i = 0; i < openedCards.length; i++) {
                 }
-                errorCard(openedCards[openedCards.length - 1]);
-                errorCard(openedCards[openedCards.length - 2]);
+                errorCard(openedCards[0]);
+                errorCard(this);
                 setTimeout(
                     function() {
-                        closeCard(openedCards[openedCards.length - 1]);
-                        closeCard(openedCards[openedCards.length - 2]);
+                        closeCard(openedCards[1]);
+                        closeCard(openedCards[0]);
                         openedCards.pop();
                         openedCards.pop();
                     }, 2000);
