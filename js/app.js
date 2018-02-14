@@ -206,8 +206,7 @@ for (var i = 0; i < cards.length; i++) {
     var icon = document.createElement('i');
 
     card.classList.add('card');
-    icon.classList.add('fa');
-    icon.classList.add('fa-' + cards[i].name);
+    icon.classList.add('fa fa-' + cards[i].name);
 
     cardsContainer.appendChild(card);
     card.appendChild(icon);
