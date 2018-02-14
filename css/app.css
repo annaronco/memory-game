@@ -39,7 +39,33 @@ h1 {
  */
 
 .deck {
-    display: grid;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 5%;
+    border-radius: 3%;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .card {
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 5%;
+    /*background-image: url(../img/eye.png);
+    background-size: cover;*/
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+/*.deck {
+    display: flex;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     background: -moz-linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     background: -webkit-linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
@@ -67,6 +93,12 @@ h1 {
     font-size: 0;
     justify-content: center;
     margin: 5%;
+}*/
+
+.deck .card:hover {
+    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
 }
 
 .deck .card.open {
@@ -271,6 +303,11 @@ h1 {
         height: 310px;
     }
 
+    .deck .card {
+        height: 63px;
+        width: 63px;
+    }
+
     .deck .card.show {
         font-size: 24px;
     }
@@ -284,6 +321,11 @@ h1 {
     .deck {
         width: 470px;
         height: 470px;
+    }
+
+    .deck .card {
+        height: 95px;
+        width: 95px;
     }
 
     .deck .card.show {
@@ -301,6 +343,11 @@ h1 {
         height: 556px;
     }
 
+    .deck .card {
+        height: 113px;
+        width: 113px;
+    }
+
     .deck .card.show {
         font-size: 40px;
     }
@@ -314,6 +361,11 @@ h1 {
     .deck {
         width: 628px;
         height: 628px;
+    }
+
+    .deck .card {
+        height: 125px;
+        width: 125px;
     }
 
     .deck .card.show {
@@ -331,19 +383,29 @@ h1 {
         height: 752px;
     }
 
+    .deck .card {
+        height: 150px;
+        width: 150px;
+    }
+
     .deck .card.show {
         font-size: 50px;
     }
 }
 
-@media only screen and (min-width: 1440) {
+@media only screen and (min-width: 1440px) {
     .container {
         width: 900px;
     }
 
     .deck {
-        width: 900px;
         height: 900px;
+        width: 900px;
+    }
+
+    .deck .card {
+        height: 180px;
+        width: 180px;
     }
 
     .deck .card.show {
