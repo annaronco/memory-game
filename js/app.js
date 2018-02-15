@@ -87,10 +87,19 @@ function addMove() {
 
 function removeStar() {
     var star = document.querySelector('.stars li');
-    if (moveCounter % 12 === 0 && moveCounter !== 0) {
+    if (moveCounter === 12 || moveCounter === 16) {
         star.parentNode.removeChild(star);
         starCounter -= 1;
-    };
+    } else if (moveCounter === 20){
+        var ex = document.createElement('li');
+        var exIcon = document.createElement('i');
+        exIcon.classList.add('fa');
+        exIcon.classList.add('fa-times');
+        ex.appendChild(exIcon);
+        star.parentNode.appendChild(ex);
+        star.parentNode.removeChild(star);
+        starCounter -= 1;
+    }
 }
 
 /* display score dialog */
@@ -137,9 +146,13 @@ function timer() {
 
     if (minutes === 0) {
         document.querySelector('span.total-time').innerText = seconds + " seconds";
+    } else if (minutes === 1 && seconds === 0) {
+        document.querySelector('span.total-time').innerText = minutes + " minute";
     } else if (minutes != 0 && seconds === 0) {
         document.querySelector('span.total-time').innerText = minutes + " minutes";
-    } else if (minutes != 0 && seconds === 1) {
+    } else if (minutes === 1 && seconds === 1) {
+        document.querySelector('span.total-time').innerText = minutes + " minute and " + seconds + " second";
+    } else if (minutes > 1 && seconds === 1) {
         document.querySelector('span.total-time').innerText = minutes + " minutes and " + seconds + " second";
     } else {
         document.querySelector('span.total-time').innerText = minutes + " minutes and " + seconds + " seconds";
