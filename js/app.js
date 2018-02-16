@@ -1,6 +1,6 @@
 /* List of card manes */
 
-var names = [
+const names = [
     "diamond",
     "paper-plane-o",
     "anchor",
@@ -13,11 +13,11 @@ var names = [
 
 /* Generate cards objects and put them in a list */
 
-var cards = [];
-var openedCards = [];
-var matchedCards = [];
+let cards = [];
+let openedCards = [];
+let matchedCards = [];
 
-for (var i = 0; i < names.length; i++ ) {
+for (let i = 0; i < names.length; i++ ) {
     cards.push({
         name: names[i],
         visible: false
@@ -67,15 +67,15 @@ function disableClick() {
     });
 }
 
-var cardsContainer = document.querySelector('.deck');
+const cardsContainer = document.querySelector('.deck');
 cardsContainer.innerHTML = '';
 
 /* Set moves counter */
 
-var moveCounter = 0;
-var starCounter = 3;
+let moveCounter = 0;
+let starCounter = 3;
 
-var moves = document.querySelector('span.moves');
+const moves = document.querySelector('span.moves');
 moves.innerText = "0";
 
 function addMove() {
@@ -86,17 +86,8 @@ function addMove() {
 /* remove stars */
 
 function removeStar() {
-    var star = document.querySelector('.stars li');
+    const star = document.querySelector('.stars li');
     if (moveCounter === 12 || moveCounter === 16) {
-        star.parentNode.removeChild(star);
-        starCounter -= 1;
-    } else if (moveCounter === 20){
-        var ex = document.createElement('li');
-        var exIcon = document.createElement('i');
-        exIcon.classList.add('fa');
-        exIcon.classList.add('fa-times');
-        ex.appendChild(exIcon);
-        star.parentNode.appendChild(ex);
         star.parentNode.removeChild(star);
         starCounter -= 1;
     }
@@ -104,7 +95,7 @@ function removeStar() {
 
 /* display score dialog */
 
-var scoreModal = document.getElementById("overlay");
+const scoreModal = document.getElementById("overlay");
 
 function displayScore() {
     document.querySelector('span.total-moves').innerHTML = moveCounter;
@@ -121,8 +112,8 @@ function closeScore() {
 
 /* Measure time*/
 
-var seconds = 0;
-var minutes = 0;
+let seconds = 0;
+let minutes = 0;
 
 function timer() {
     if (seconds < 59) {
@@ -132,7 +123,7 @@ function timer() {
         seconds = 0;
     }
 
-    var secondsTotal = "00"
+    let secondsTotal = "00"
 
     if (seconds === 0) {
         secondsTotal = "00";
@@ -142,7 +133,7 @@ function timer() {
         secondsTotal = seconds;
     }
 
-    var minutesTotal = "00"
+    let minutesTotal = "00"
 
     if (minutes === 0) {
         minutesTotal = "00";
@@ -152,7 +143,7 @@ function timer() {
         minutesTotal = minutes;
     }
 
-    var displayMinutes = ""
+    let displayMinutes = ""
 
     if (minutes === 1) {
         displayMinutes = minutesTotal + " minute";
@@ -160,7 +151,7 @@ function timer() {
         displayMinutes = minutesTotal + " minutes"
     }
 
-    var displaySeconds = ""
+    let displaySeconds = ""
 
     if (seconds === 1) {
         displayMinutes = secondsTotal + " second";
@@ -230,10 +221,10 @@ function clickCard() {
 
 /* Generate cards and add event listener */
 
-for (var i = 0; i < cards.length; i++) {
+for (let i = 0; i < cards.length; i++) {
 
-    var card = document.createElement('li');
-    var icon = document.createElement('i');
+    const card = document.createElement('li');
+    const icon = document.createElement('i');
 
     card.classList.add('card');
     icon.classList.add('fa');
