@@ -109,6 +109,9 @@ var scoreModal = document.getElementById("overlay");
 function displayScore() {
     document.querySelector('span.total-moves').innerHTML = moveCounter;
     document.querySelector('span.total-stars').innerText = starCounter;
+    if (starCounter === 1) {
+        document.querySelector('span.stars').innerText = " star."
+    }
     scoreModal.style.visibility = "visible";
 }
 
@@ -120,7 +123,6 @@ function closeScore() {
 
 var seconds = 0;
 var minutes = 0;
-var zeroSeconds = 0;
 
 function timer() {
     if (seconds < 59) {
@@ -130,35 +132,50 @@ function timer() {
         seconds = 0;
     }
 
-    if (seconds < 10) {
-        zeroSeconds = "0";
+    var secondsTotal = "00"
+
+    if (seconds === 0) {
+        secondsTotal = "00";
+    } else if (seconds < 10) {
+        secondsTotal = "0" + seconds;
     } else {
-        zeroSeconds = "";
+        secondsTotal = seconds;
     }
 
-    if (minutes < 10) {
-        zeroMinutes = "0";
-    } else {
-        zeroMinutes = "";
-    }
-
-    document.querySelector('span.time').innerText = zeroMinutes + minutes + " : " + zeroSeconds + seconds;
+    var minutesTotal = "00"
 
     if (minutes === 0) {
-        document.querySelector('span.total-time').innerText = seconds + " seconds";
-    } else if (minutes === 1 && seconds === 0) {
-        document.querySelector('span.total-time').innerText = minutes + " minute";
-    } else if (minutes != 0 && seconds === 0) {
-        document.querySelector('span.total-time').innerText = minutes + " minutes";
-    } else if (minutes === 1 && seconds === 1) {
-        document.querySelector('span.total-time').innerText = minutes + " minute and " + seconds + " second";
-    } else if (minutes > 1 && seconds === 1) {
-        document.querySelector('span.total-time').innerText = minutes + " minutes and " + seconds + " second";
+        minutesTotal = "00";
+    } else if (minutes < 10) {
+        minutesTotal = "0" + minutes;
     } else {
-        document.querySelector('span.total-time').innerText = minutes + " minutes and " + seconds + " seconds";
+        minutesTotal = minutes;
+    }
+
+    var displayMinutes = ""
+
+    if (minutes === 1) {
+        displayMinutes = minutesTotal + " minute";
+    } else if (minutes !== 0 && minutes !== 1) {
+        displayMinutes = minutesTotal + " minutes"
+    }
+
+    var displaySeconds = ""
+
+    if (seconds === 1) {
+        displayMinutes = secondsTotal + " second";
+    } else if (seconds !== 0 && seconds !== 1) {
+        displaySeconds = secondsTotal + " seconds"
+    }
+
+    document.querySelector('span.time').innerText = minutesTotal + " : " + secondsTotal;
+
+    if (minutes !== 0 && seconds !== 0) {
+        document.querySelector('span.total-time').innerText = displayMinutes + " and " + displaySeconds;
+    } else {
+        document.querySelector('span.total-time').innerText = displayMinutes + displaySeconds;
     }
 }
-
 
 /* Game moves functionality */
 //TODO make one opened card not clickable 2 times
