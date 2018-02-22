@@ -85,6 +85,7 @@ h1 {
 .deck .card.match {
     animation-duration: 2s;
     animation-name: match;
+    animation-iteration-count: 1;
     background: #31d5c4;
     cursor: default;
 }
